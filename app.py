@@ -210,9 +210,6 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
 ])
 
 if __name__ == '__main__':
-    app.run_server(
-        port=8050,
-        host='127.0.0.1'
-    )
+    app.run_server()
 
 #0.0.0.0
