@@ -46,11 +46,11 @@ totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims/1000000).round(1)
 
 lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastSaturdayString, 'in_millions']
-lastWeekClaims = lastWeekClaims.values[0].round(1)
+lastWeekClaims = lastWeekClaims.round(1)
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == lastLastSaturday, 'in_millions']
-totalContinuedClaims = totalContinuedClaims.values[0].round(1)
+totalContinuedClaims = totalContinuedClaims.round(1)
 
 currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-'+lastMonth, 'Unemployment Rate'].values[0]
 
