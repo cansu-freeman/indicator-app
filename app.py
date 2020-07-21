@@ -24,17 +24,22 @@ thisYear = str(date.today().year)
 thisMonth = date.today().month
 lastMonth = '0'+str(thisMonth - 1)
 
+# MOST RECENT PAST SATURDAY
 lastSaturday = today - timedelta(days=today.weekday()) + timedelta(days=5, weeks=-1)
 lastSaturdayString = lastSaturday.strftime('%Y-%m-%d')
 
+# SATURDAY PRIOR THAN MOST RECENT
 lastLastSaturday = lastSaturday + timedelta(weeks=-1)
-lastLastSaturday = lastLastSaturday.strftime('%Y-%m-%d')
+lastLastSaturdayString = lastLastSaturday.strftime('%Y-%m-%d')
+
+# THREE SATURDAYS AGO
+threeSatsAgo = lastLastSaturday + timedelta(weeks=-1)
+threeSatsAgo = threeSatsAgo.strftime('%Y-%m-%d')
 
 
 ### Style Sheet for Dash/Heroku
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
 
 
 ### Spreadsheets
@@ -46,10 +51,10 @@ unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freem
 totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims/1000000).round(1)
 
-lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastSaturdayString, 'in_millions'].sum().round(1)
+lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
-totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == lastLastSaturday, 'in_millions'].sum().round(1)
+totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == threeSatsAgo, 'in_millions'].values[0].round(1)
 
 currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-'+lastMonth, 'Unemployment Rate'].sum()
 
@@ -57,7 +62,7 @@ currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYe
 fig1 = go.Figure()
 fig1.add_trace(go.Scatter(x = ICSA_df['Date'], y = ICSA_df['ICSA'],
                     mode = 'lines', 
-                    name = 'Initial CLaims',
+                    name = 'Initial Claims',
                     line_color = colorOne))
 fig1.add_trace(go.Scatter(x = ICSA_df['Date'], y = CCSA_df['CCSA'],
                     mode = 'lines',
@@ -110,9 +115,11 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
             html.H1('Economic Indicators'
             )
         ], style = {'width' : '60%'}, className = 'two columns'),
+
+        # Button on top of page 
         html.Div([
-            html.Button(['CREATED BY ',
-                dcc.Link('CANSU FREEMAN', href ='https://cansufreeman.com', 
+            html.Button(['VIEW ON ',
+                html.A('GITHUB', href ='https://github.com/cansu-freeman/indicator-app', 
                 style = {'color': highlightColor})
             ])
         ], style = {'justify-items': 'right', 'display': 'flex', 'width': '20%'}, className = 'two columns'),
@@ -204,7 +211,7 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
     html.Div([
         html.P('Source: Bureau of Labor Statistics and Federal Reserve Economic Data'),
         html.P([
-            dcc.Link('View on GitHub', href = 'https://github.com/cansu-freeman', style = {'color': highlightColor})
+            html.A('Created by Cansu Freeman', href = 'https://cansufreeman.com', style = {'color': highlightColor})
         ])])
 ])
 
