@@ -314,11 +314,11 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
         html.H1('THE INDICATOR APP'),
 
         # Button on top of page 
-        html.Button(['VIEW ON ',
-                html.A('GITHUB', href ='https://github.com/cansu-freeman/indicator-app', 
-                style = {'color': highlightColor}
-                )
-        ]),
+        # html.Button(['VIEW ON ',
+        #         html.A('GITHUB', href ='https://github.com/cansu-freeman/indicator-app', 
+        #         style = {'color': highlightColor}
+        #         )
+        # ]),
     ], style = {'text-align': 'center'}),
 
     html.Br(),
