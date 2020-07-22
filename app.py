@@ -49,7 +49,8 @@ ICSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator
 ICSA_historical = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/ICSA_historical.csv', header = 0)
 CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/fredCCSA.csv', header= 0)
 unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/unemploymentRate.csv', header= 0)
-u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/U6unemployment.csv')
+u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/U6unemployment.csv', header = 0)
+payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/PayrollJobs.csv', header = 0)
 
 # ### Defining Key Inicators as Variables
 totalInitialClaims = ICSA_df['ICSA'].sum()
@@ -149,7 +150,6 @@ fig2.update_layout(
 ### fig3: Unemployment Rate since 2010
 fig3 = go.Figure()
 fig3.add_trace(go.Bar(x = unemploymentRate_df['Date'], y = unemploymentRate_df['Unemployment Rate'],
-                    #mode = 'lines',
                     name = 'Unemployment Rate',
                     marker_color = colorOne))
 fig3.update_layout(
@@ -185,6 +185,7 @@ fig3.update_layout(
     )
 )
 
+### fig4: U6 Unemployment Rate
 fig4 = go.Figure()
 fig4.add_trace(go.Scatter(x = u6_df['Date'], y = u6_df['U6'],
                     mode = 'lines',
@@ -227,6 +228,81 @@ fig4.update_layout(
     )
 )
 
+###fig5: Payroll Jobs
+fig5 = go.Figure()
+fig5.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['12M Change'],
+                    name = 'MoY Change in Payroll Jobs',
+                    marker_color = colorThree))
+fig5.update_layout(
+    xaxis = dict(
+        showline = True,
+        showgrid = False,
+        linecolor = textColor,
+        type = 'date',
+        tickformat = '%Y',
+        ticks = 'outside',
+        tickangle=-45
+    ), 
+    yaxis = dict(
+        title = '',
+        showline = False,
+        linecolor = textColor,
+        showgrid = True,
+        gridcolor = '#e1e1e1',
+     ),
+    margin= dict(
+        t=50,
+        l=20,
+        r=20,
+    ),
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="center",
+        x=1
+    )
+)
+
+### fig6: Month to Month Payroll Jobs Change
+fig6 = go.Figure()
+fig6.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['1M Change'],
+                    name = 'MoY Change in Payroll Jobs',
+                    marker_color = colorThree))
+fig6.update_layout(
+    xaxis = dict(
+        showline = True,
+        showgrid = False,
+        linecolor = textColor,
+        type = 'date',
+        tickformat = '%Y',
+        ticks = 'outside',
+        tickangle=-45
+    ), 
+    yaxis = dict(
+        title = '',
+        showline = False,
+        linecolor = textColor,
+        showgrid = True,
+        gridcolor = '#e1e1e1',
+     ),
+    margin= dict(
+        t=50,
+        l=20,
+        r=20,
+    ),
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="center",
+        x=1
+    )
+)
 
 
 
@@ -357,7 +433,40 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
                             'border-radius' : 10,
                             'box-shadow':'10px 5px 8px #e6e6e6',
                             'background-color' : 'white',
-                            'padding': '20px'}),
+                            'padding': '20px',
+                            'text-color' : textColor}),
+    html.Br(),
+    html.Br(),
+    html.H3('Jobs Report'),
+    html.Div([
+        dcc.Tabs([
+            dcc.Tab(label = 'Annual Payroll Jobs Change', children = [
+                html.H6('Annual Payroll Jobs Change Since 2007 (Month over Year)'),
+                dcc.Graph(
+                    id ='12M Change Payroll Jobs',
+                    figure = fig5
+                ),
+                html.P('This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior.'),
+            ]),
+            dcc.Tab(label = 'Monthly Payroll Jobs Change', children = [
+                html.H6('Month to Month Payroll Jobs Change Since 2007'),
+                dcc.Graph(
+                    id = '1M Change in Payroll Jobs',
+                    figure = fig6
+                ),
+                html.P('')
+            ])
+        ], colors={
+        "border": "white",
+        "primary": highlightColor,
+        "background": 'ghostwhite'})
+    ], style = {
+                            'border': '1px #f9f9f9 solid',
+                            'border-radius' : 10,
+                            'box-shadow':'10px 5px 8px #e6e6e6',
+                            'background-color' : 'white',
+                            'padding': '20px',
+                            'text-color': textColor}),
 
     #source text
     html.Br(),
