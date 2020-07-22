@@ -45,11 +45,11 @@ server = app.server
 
 
 ### Spreadsheets
-ICSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/fredICSA.csv', header =0)
-ICSA_historical = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/ICSA_historical.csv', header = 0)
-CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/fredCCSA.csv', header= 0)
-unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/unemploymentRate.csv', header= 0)
-u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/U6unemployment.csv', header = 0)
+ICSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/fredICSA.csv', header =0)
+ICSA_historical = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/ICSA_historical.csv', header = 0)
+CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/fredCCSA.csv', header= 0)
+unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/unemploymentRate.csv', header= 0)
+u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/U6unemployment.csv', header = 0)
 payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/PayrollJobs.csv', header = 0)
 
 # ### Defining Key Inicators as Variables
