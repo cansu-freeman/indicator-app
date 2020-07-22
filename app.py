@@ -308,10 +308,10 @@ fig6.update_layout(
 
 ################ APPLICATION
 
-app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '30px', 'color': textColor}, children =[
+app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '30px', 'color': textColor, 'font-family': 'Verdana'}, children =[
     
     html.Div([
-        html.H1('The Indicator App'),
+        html.H1('THE INDICATOR APP'),
 
         # Button on top of page 
         html.Button(['VIEW ON ',
@@ -388,7 +388,7 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
 
     html.Br(),
         
-    #Tabbed Graphs
+    #Tabbed Unemployment Graphs 
     html.Div([
         dcc.Tabs([
             dcc.Tab(label = 'Unemployment Claims', children = [ 
@@ -437,6 +437,8 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
                             'text-color' : textColor}),
     html.Br(),
     html.Br(),
+
+    # Tabbed Jobs Graphs
     html.H3('Jobs Report'),
     html.Div([
         dcc.Tabs([
