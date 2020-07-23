@@ -56,10 +56,10 @@ payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/in
 totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims/1000000).round(1)
 
-lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
+lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastSaturdayString, 'in_millions'].values[0].round(1)
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
-totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == threeSatsAgo, 'in_millions'].values[0].round(1)
+totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
 
 currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-'+lastMonth, 'Unemployment Rate'].sum()
 
@@ -107,7 +107,6 @@ fig1.update_layout(
         x=1
     )
 )
-
 
 ### fig2: Historical Initial Claims Nationally
 fig2 = go.Figure()
@@ -184,6 +183,7 @@ fig3.update_layout(
         x=1
     )
 )
+
 
 ### fig4: U6 Unemployment Rate
 fig4 = go.Figure()
@@ -306,7 +306,7 @@ fig6.update_layout(
 
 
 
-################ APPLICATION
+############### APPLICATION
 
 app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '30px', 'color': textColor, 'font-family': 'Verdana'}, children =[
     
@@ -443,7 +443,7 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
     html.Div([
         dcc.Tabs([
             dcc.Tab(label = 'Annual Payroll Jobs Change', children = [
-                html.H6('Annual Payroll Jobs Change Since 2007 (Month over Year)'),
+                html.H6('Annual Payroll Jobs Change Since 2000 (Month over Year)'),
                 dcc.Graph(
                     id ='12M Change Payroll Jobs',
                     figure = fig5
@@ -451,7 +451,7 @@ app.layout = html.Div(style = {'backgroundColor': backgroundColor, 'padding': '3
                 html.P('This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior.'),
             ]),
             dcc.Tab(label = 'Monthly Payroll Jobs Change', children = [
-                html.H6('Month to Month Payroll Jobs Change Since 2007'),
+                html.H6('Month to Month Payroll Jobs Change Since 2000'),
                 dcc.Graph(
                     id = '1M Change in Payroll Jobs',
                     figure = fig6
