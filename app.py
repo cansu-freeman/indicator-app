@@ -4,6 +4,7 @@ import dash_html_components as html
 import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
+import numpy as np
 from datetime import datetime, date, timedelta
 
 
@@ -38,16 +39,14 @@ xaxisYearlyStyle = {'showline': True,
                 'linecolor': textColor,
                 'type': 'date',
                 'tickformat': '%Y',
-                'ticks': 'outside',
-                'tickangle': -45}
+                'ticks': 'outside'}
 
 xaxisMonthlyStyle = {'showline': True,
                 'showgrid': False,
                 'linecolor': textColor,
                 'type': 'date',
                 'tickformat': '%b %d',
-                'ticks': 'outside',
-                'tickangle': -45}
+                'ticks': 'outside'}
 
 yaxisStyle = {'showline': False,
                 'linecolor': textColor,
@@ -79,6 +78,7 @@ thisYear = str(date.today().year)
 
 thisMonth = date.today().month
 lastMonth = '0'+str(thisMonth - 1)
+twoMonthsAgo = '0'+str(thisMonth -2)
 
 lastSaturday = today - timedelta(days=today.weekday()) + timedelta(days=5, weeks=-1)
 lastSaturdayString = lastSaturday.strftime('%Y-%m-%d')
@@ -104,6 +104,8 @@ CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator
 unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/unemploymentRate.csv', header= 0)
 u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/U6unemployment.csv', header = 0)
 payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/PayrollJobs.csv', header = 0)
+jobsBySector_MoM_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoM.csv', header = 0)
+jobsBySector_MoY_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoY.csv', header = 0)
 
 
 ### KEY INDICATORS AS VARIABLES
@@ -190,7 +192,7 @@ fig4.update_layout(
 fig5 = go.Figure()
 fig5.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['12M Change'],
                     name = 'MoY Change in Payroll Jobs',
-                    marker_color = colorThree))
+                    marker_color = colorTwo))
 fig5.update_layout(
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
@@ -204,10 +206,81 @@ fig5.update_layout(
 fig6 = go.Figure()
 fig6.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['1M Change'],
                     name = 'MoY Change in Payroll Jobs',
-                    marker_color = colorThree))
+                    marker_color = colorTwo))
 fig6.update_layout(
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
+    margin= marginStyle,
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = legendStyle
+)
+
+### fig7: Recent Month Change Payroll Jobs by Sector 
+# Prepping DF
+jobsBySector_MoM_df = jobsBySector_MoM_df.rename(columns = {'Unnamed: 0' : 'Sector'}) #have to rename because of github
+jobsBySector_MoM_df['Sector'].replace({'fedGovt 1M': 'Federal Govt',
+                                        'eduHealth 1M': 'Education & Health Services',
+                                        'profBusServ 1M': 'Professional Business Services',
+                                        'leisureHosp 1M': 'Leisure & Hospitality',
+                                        'retailTrade 1M': 'Retail Trade',
+                                        'mfg 1M': 'Manufacturing',
+                                        'financial 1M': 'Financial',
+                                        'constr 1M': 'Construction',
+                                        'wholesale 1M': 'Wholesale Trade',
+                                        'other 1M': 'Other Servies',
+                                        'transp 1M': 'Transportation',
+                                        'info 1M': 'Information'}, inplace = True)
+jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-'+lastMonth]<0, colorThree, colorOne)
+
+fig7 = go.Figure()
+fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-'+lastMonth], y = jobsBySector_MoM_df['Sector'],
+                    orientation = 'h',
+                    marker_color = jobsBySector_MoM_df['Color']))
+fig7.update_layout(
+    xaxis = {
+        'title': 'Number of Jobs (in thousands)',
+        'showline': True,
+        'showgrid': True,
+        'gridcolor': '#e1e1e1',
+        'linecolor': textColor
+    },
+    margin= marginStyle,
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = legendStyle
+)
+
+### fig8: Recent Yearly (MoY) Change Payroll Jobs by Sector
+# Preparing DF
+jobsBySector_MoY_df = jobsBySector_MoY_df.rename(columns = {'Unnamed: 0' : 'Sector'})
+jobsBySector_MoY_df['Sector'].replace({'fedGovt 12M': 'Federal Govt',
+                                        'eduHealth 12M': 'Education & Health Services',
+                                        'profBusServ 12M': 'Professional Business Services',
+                                        'leisureHosp 12M': 'Leisure & Hospitality',
+                                        'retailTrade 12M': 'Retail Trade',
+                                        'mfg 12M': 'Manufacturing',
+                                        'financial 12M': 'Financial',
+                                        'constr 12M': 'Construction',
+                                        'wholesale 12M': 'Wholesale Trade',
+                                        'other 12M': 'Other Servies',
+                                        'transp 12M': 'Transportation',
+                                        'info 12M': 'Information'}, inplace = True)
+
+jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-'+lastMonth]<0, colorThree, colorOne)
+
+fig8 = go.Figure()
+fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-'+lastMonth], y = jobsBySector_MoY_df['Sector'],
+                    orientation = 'h',
+                    marker_color = jobsBySector_MoY_df['Color']))
+fig8.update_layout(
+    xaxis = {
+        'title': 'Number of Jobs (in thousands)',
+        'showline': True,
+        'showgrid': True,
+        'gridcolor': '#e1e1e1',
+        'linecolor': textColor
+    },
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
@@ -342,6 +415,24 @@ app.layout = html.Div(children = [
                 dcc.Graph(
                     id = 'monthly-jobs-change',
                     figure = fig6
+                ),
+                html.P('')
+            ]),
+
+            dcc.Tab(label = 'Current Month Job Change by Sector', children = [
+                html.H6("Payroll Job Change by Sector for June 2020 (in thousands 000's)"),
+                dcc.Graph(
+                    id = 'sector-MoM',
+                    figure = fig7
+                ),
+                html.P('')
+            ]),
+
+            dcc.Tab(label = 'One Year Job Change by Sector', children = [
+                html.H6("Payroll Job Change by Sector from June 2019 to June 2020 (in thousands 000's)"),
+                dcc.Graph(
+                    id = 'sector-MoY',
+                    figure = fig8
                 ),
                 html.P('')
             ])
