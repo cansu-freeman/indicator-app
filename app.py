@@ -48,12 +48,14 @@ xaxisMonthlyStyle = {'showline': True,
                 'tickformat': '%b %d',
                 'ticks': 'outside'}
 
-yaxisStyle = {'showline': False,
+yaxisStyle = { 'fixedrange': True,
+                'showline': False,
                 'linecolor': textColor,
                 'showgrid': True,
                 'gridcolor': '#e1e1e1'}
 
 yaxisPercentStyle = {'title': '%',
+                'fixedrange': True,
                 'showline': False,
                 'linecolor': textColor,
                 'showgrid': True,
@@ -67,6 +69,11 @@ legendStyle = {'orientation': 'h',
                 'y': 1.02,
                 'xanchor': 'center',
                 'x': 1}
+
+headerStyle = {'letter-spacing': '3px',
+                'font-weight': 'lighter',
+                'text-align': 'left'
+}
 
    
 
@@ -302,8 +309,8 @@ app.layout = html.Div(children = [
     html.Br(),
 
     html.Div([
-        html.H3('Unemployment Situation',
-            style = {'text-align': 'left'}),
+        html.H3('UNEMPLOYMENT SITUATION',
+            style = headerStyle),
     ]),
     
     ### QUADBOX INDICATORS AT TOP
@@ -393,8 +400,8 @@ app.layout = html.Div(children = [
     html.Br(),
 
     html.Div([
-        html.H3('Jobs Report',
-            style = {'text-align': 'left'}),
+        html.H3('JOBS REPORT',
+            style = headerStyle),
     ]),
 
     ### TABBED JOBS GRAPHS
@@ -407,7 +414,7 @@ app.layout = html.Div(children = [
                     id = 'annual-jobs-change',
                     figure = fig5
                 ),
-                html.P('This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior.')
+                html.P("This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior. The y-axis is scaled in thousands (000's) so 20k corresponds to 2 million. This effect will be changed in future versions of The Indicator.")
             ]),
 
             dcc.Tab(label = 'Monthly Jobs Change', children = [
@@ -416,7 +423,7 @@ app.layout = html.Div(children = [
                     id = 'monthly-jobs-change',
                     figure = fig6
                 ),
-                html.P('')
+                html.P("This chart shows month-to-month change in payroll jobs. The y-axis is scaled in thousands (000's) so 20k corresponds to 2 million. This effect will be changed in future versions of The Indicator.")
             ]),
 
             dcc.Tab(label = 'Current Month Job Change by Sector', children = [
@@ -425,7 +432,7 @@ app.layout = html.Div(children = [
                     id = 'sector-MoM',
                     figure = fig7
                 ),
-                html.P('')
+                html.P('Change in number of jobs for the month of June. The "Leisure and Hospitality sector gained over 2 million jobs.')
             ]),
 
             dcc.Tab(label = 'One Year Job Change by Sector', children = [
@@ -434,7 +441,7 @@ app.layout = html.Div(children = [
                     id = 'sector-MoY',
                     figure = fig8
                 ),
-                html.P('')
+                html.P('This represents the change in jobs per sector over the last year.')
             ])
 
         ], colors = tabColors)
@@ -470,7 +477,8 @@ app.layout = html.Div(children = [
     'backgroundColor': backgroundColor,
     'padding': '30px',
     'color': textColor,
-    'font-family': 'Verdana'})
+    'font-family': 'Helvetica',
+    'font-weight': 'lighter'})
 
 
 
