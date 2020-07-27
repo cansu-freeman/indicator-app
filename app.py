@@ -10,7 +10,7 @@ from datetime import datetime, date, timedelta
 
 ### COLORS & STYLE OF GRAPHS AS VARIABLES
 backgroundColor = 'whitesmoke'
-textColor = 'darkslategrey'
+textColor = 'black'
 highlightColor = 'lightsteelblue'
 colorOne = 'mediumaquamarine'
 colorTwo = 'cornflowerblue'
@@ -70,8 +70,9 @@ legendStyle = {'orientation': 'h',
                 'xanchor': 'center',
                 'x': 1}
 
-headerStyle = {'letter-spacing': '3px',
+headerStyle = {'letter-spacing': '2px',
                 'font-weight': 'lighter',
+                'font-family': 'Helvetica',
                 'text-align': 'left'
 }
 
@@ -302,14 +303,21 @@ fig8.update_layout(
 app.layout = html.Div(children = [
 
     html.Div([
-        html.H1('THE INDICATOR APP',
-            style = {'text-align': 'center'})
-    ]),
+        html.Img(src = app.get_asset_url('banner.png'), alt = 'The Indicator App', style = {
+            'width': '100%',
+            'text-align': 'center'
+        })
+    ], style = quadBoxStyle),
+
+    # html.Div([
+    #     html.H1('THE INDICATOR APP',
+    #         style = {'text-align': 'center'})
+    # ]),
 
     html.Br(),
 
     html.Div([
-        html.H3('UNEMPLOYMENT SITUATION',
+        html.H4('UNEMPLOYMENT SITUATION',
             style = headerStyle),
     ]),
     
@@ -400,7 +408,7 @@ app.layout = html.Div(children = [
     html.Br(),
 
     html.Div([
-        html.H3('JOBS REPORT',
+        html.H4('JOBS REPORT',
             style = headerStyle),
     ]),
 
