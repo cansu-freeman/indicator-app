@@ -138,6 +138,7 @@ fig1.add_trace(go.Scatter(x = ICSA_df['Date'], y = CCSA_df['CCSA'],
                     name = 'Continuing Claims',
                     line_color = colorTwo))
 fig1.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisMonthlyStyle, 
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -152,6 +153,7 @@ fig2.add_trace(go.Bar(x = ICSA_historical['Date'], y = ICSA_historical['ICSA'],
                     name = 'Initial Claims',
                     marker_color = colorOne))
 fig2.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -167,6 +169,7 @@ fig3.add_trace(go.Bar(x = unemploymentRate_df['Date'], y = unemploymentRate_df['
                     name = 'Unemployment Rate',
                     marker_color = colorOne))
 fig3.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisPercentStyle,
     margin= marginStyle,
@@ -187,6 +190,7 @@ fig4.add_trace(go.Scatter(x = unemploymentRate_df['Date'], y = unemploymentRate_
                     name = 'Unemployment Rate',
                     line_color = colorOne))
 fig4.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisPercentStyle,
     margin= marginStyle,
@@ -201,6 +205,7 @@ fig5.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['12M Change
                     name = 'MoY Change in Payroll Jobs',
                     marker_color = colorTwo))
 fig5.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -215,6 +220,7 @@ fig6.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['1M Change'
                     name = 'MoY Change in Payroll Jobs',
                     marker_color = colorTwo))
 fig6.update_layout(
+    font = {'family': 'Futura'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -242,9 +248,12 @@ jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-'+lastMon
 
 fig7 = go.Figure()
 fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-'+lastMonth], y = jobsBySector_MoM_df['Sector'],
+                    text = jobsBySector_MoM_df[thisYear+'-'+lastMonth].round(1), #change the rounding next month
+                    textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
 fig7.update_layout(
+    font = {'family': 'Futura'},
     xaxis = {
         'title': 'Number of Jobs (in thousands)',
         'showline': True,
@@ -278,9 +287,12 @@ jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-'+lastMon
 
 fig8 = go.Figure()
 fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-'+lastMonth], y = jobsBySector_MoY_df['Sector'],
+                    text = jobsBySector_MoY_df[thisYear+'-'+lastMonth].round(1),
+                    textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoY_df['Color']))
 fig8.update_layout(
+    font = {'family': 'Futura'},
     xaxis = {
         'title': 'Number of Jobs (in thousands)',
         'showline': True,
@@ -451,7 +463,8 @@ app.layout = html.Div(children = [
                 html.H6("Payroll Job Change by Sector for June 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoM',
-                    figure = fig7
+                    figure = fig7,
+                    config = {'staticPlot': True}
                 ),
                 html.P('Change in number of jobs for the month of June. The "Leisure and Hospitality sector gained over 2 million jobs.')
             ]),
@@ -460,7 +473,8 @@ app.layout = html.Div(children = [
                 html.H6("Payroll Job Change by Sector from June 2019 to June 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoY',
-                    figure = fig8
+                    figure = fig8,
+                    config = {'staticPlot': True}
                 ),
                 html.P('This represents the change in jobs per sector over the last year.')
             ])
