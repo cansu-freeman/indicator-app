@@ -64,11 +64,10 @@ yaxisPercentStyle = {'title': '%',
 
 marginStyle = {'t': 50, 'l': 20, 'r': 20}
 
-legendStyle = {'orientation': 'h',
-                'yanchor': 'bottom',
-                'y': 1.02,
+legendStyle = {'yanchor': 'bottom',
+                'y': 1.01,
                 'xanchor': 'center',
-                'x': 1}
+                'x': .90}
 
 headerStyle = {'letter-spacing': '2px',
                 'font-weight': 'lighter',
