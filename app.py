@@ -9,8 +9,8 @@ from datetime import datetime, date, timedelta
 
 
 ### COLORS & STYLE OF GRAPHS AS VARIABLES
-backgroundColor = 'whitesmoke'
-textColor = 'black'
+backgroundColor = 'white'
+textColor = '#282A2A'
 highlightColor = 'lightsteelblue'
 colorOne = 'mediumaquamarine'
 colorTwo = 'cornflowerblue'
@@ -72,7 +72,7 @@ legendStyle = {'orientation': 'h',
 
 headerStyle = {'letter-spacing': '2px',
                 'font-weight': 'lighter',
-                'font-family': 'Helvetica',
+                'font-family': 'Futura',
                 'text-align': 'left'
 }
 
@@ -302,18 +302,32 @@ fig8.update_layout(
 
 app.layout = html.Div(children = [
 
+
     html.Div([
-        html.Img(src = app.get_asset_url('banner.png'), alt = 'The Indicator App', style = {
-            'width': '100%',
-            'text-align': 'center'
-        })
-    ], style = quadBoxStyle),
+        html.Img(src = app.get_asset_url('icon.png'), alt = 'The Indicator App Logo', style = {
+            'width': '100px',
+            'height': '100px',
+            #'vertical-align': 'bottom'
+        }),
+            html.H1('The Indicator  ', style = {'display': 'inline-block',
+                                                'width': '65%',
+                                                'font-family': 'Futura',
+                                                'color': '#282A2A',
+                                                'font-weight': 'bold'}),
+            html.Button(['VIEW ON ',
+                    html.A('GITHUB', href = 'https://github.com/cansu-freeman/indicator-app',
+                        style = {'color': highlightColor}
+                    )
+            ], style = {'display': 'inline-block',
+                        'width': '166px',
+                        'height': '40px'}
+            ),
+    ], 
+    style = {'background': 'white',
+                'width': '100%'}
+    ),
 
-    # html.Div([
-    #     html.H1('THE INDICATOR APP',
-    #         style = {'text-align': 'center'})
-    # ]),
-
+    html.Br(),
     html.Br(),
 
     html.Div([
@@ -462,19 +476,11 @@ app.layout = html.Div(children = [
 
     ### SOURCES
     html.Div([
-        html.P('Sources: Bureau of Labor Statistics and Federal Reserve Economic Data'),
-
         html.P([
             html.A('Developed by Cansu Freeman', href = 'https://cansufreeman.com',
                 style = {'color': highlightColor})
-        ])
-    ]),
-
-    html.Div([
-        html.Button(['VIEW ON ',
-                    html.A('GITHUB', href = 'https://github.com/cansu-freeman/indicator-app',
-                        style = {'color': highlightColor})
-        ])
+        ]),
+        html.P('Sources: Bureau of Labor Statistics and Federal Reserve Economic Data'),
     ], style = {'width': '100%', 'text-align': 'right'}),
 
     html.Br()
@@ -483,10 +489,10 @@ app.layout = html.Div(children = [
 
 ], style = {
     'backgroundColor': backgroundColor,
-    'padding': '30px',
+    'padding': '10px',
     'color': textColor,
-    'font-family': 'Helvetica',
-    'font-weight': 'lighter'})
+    'font-family': 'Futura',
+    'font-weight': ''})
 
 
 
