@@ -3,6 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 from datetime import datetime, date, timedelta
@@ -113,6 +114,7 @@ u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-a
 payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/PayrollJobs.csv', header = 0)
 jobsBySector_MoM_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoM.csv', header = 0)
 jobsBySector_MoY_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoY.csv', header = 0)
+realGDP_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/realGDP.csv', header = 0)
 
 
 ### KEY INDICATORS AS VARIABLES
@@ -307,6 +309,42 @@ fig8.update_layout(
 )
 
 
+### fig9: Percent Change per Quarter Real GDP
+#negative values to be red and positive green
+realGDP_df['Color'] = np.where(realGDP_df['Percent Change']<0, colorThree, colorOne)
+
+fig9 = go.Figure()
+fig9.add_trace(go.Bar(x = realGDP_df['Date'], y = realGDP_df['Percent Change'],
+                    name = 'Percent Change',
+                    marker_color = realGDP_df['Color']))
+fig9.update_layout(
+    font = {'family': 'Futura'},
+    xaxis = xaxisYearlyStyle,
+    yaxis = yaxisPercentStyle,
+    margin = marginStyle,
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = legendStyle
+)
+
+### fig10: Quarterly Real GDP (trillions)
+
+fig10 = go.Figure()
+fig10.add_trace(go.Scatter(x = realGDP_df['Date'], y = realGDP_df['Real GDP'],
+                    name = 'Real GDP',
+                    mode = 'lines',
+                    line_color = colorTwo))
+fig10.update_layout(
+    font = {'family': 'Futura'},
+    xaxis = xaxisYearlyStyle,
+    yaxis = yaxisStyle,
+    margin = marginStyle,
+    paper_bgcolor = 'white',
+    plot_bgcolor = 'white',
+    legend = legendStyle
+)
+
+
 
 
 ################ APPLICATION #################
@@ -432,12 +470,12 @@ app.layout = html.Div(children = [
 
     html.Br(),
 
+     ### TABBED JOBS GRAPHS
     html.Div([
         html.H4('JOBS REPORT',
             style = headerStyle),
     ]),
 
-    ### TABBED JOBS GRAPHS
     html.Div([
         dcc.Tabs([
 
@@ -485,7 +523,39 @@ app.layout = html.Div(children = [
     
     html.Br(),
 
+    html.Br(),
 
+    ### Tabbed GDP Graphs
+    html.Div([
+        html.H4('GROSS DOMESTIC PRODUCT',
+            style = headerStyle),
+    ]),
+    html.Div([
+        dcc.Tabs([
+
+            dcc.Tab(label = 'Real GDP Percent Change', children =[
+                html.H6('Quarterly Real GDP Percent Change From Last Quarter'),
+                dcc.Graph(
+                    id = 'gdp-percent-change',
+                    figure = fig9
+                ),
+                html.P(' ')
+            ]),
+
+            dcc.Tab(label = 'Quarterly Real GDP', children = [
+                html.H6('Real GDP per Quarter (in trillions)'),
+                dcc.Graph(
+                    id = 'real-gdp',
+                    figure = fig10
+                ),
+                html.P(' ')
+            ])
+
+        ], colors = tabColors)
+
+    ], style = tabsStyle),
+
+    html.Br(),
 
     ### SOURCES
     html.Div([
@@ -498,7 +568,6 @@ app.layout = html.Div(children = [
 
     html.Br()
     
-
 
 ], style = {
     'backgroundColor': backgroundColor,
