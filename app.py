@@ -72,7 +72,6 @@ legendStyle = {'yanchor': 'bottom',
 
 headerStyle = {'letter-spacing': '2px',
                 'font-weight': 'lighter',
-                'font-family': 'Futura',
                 'text-align': 'left'
 }
 
