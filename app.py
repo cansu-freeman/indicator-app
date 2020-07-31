@@ -359,7 +359,6 @@ app.layout = html.Div(children = [
         }),
             html.H1('The Indicator  ', style = {'display': 'inline-block',
                                                 'width': '65%',
-                                                'font-family': 'Futura',
                                                 'color': '#282A2A',
                                                 'font-weight': 'bold'}),
             # html.Button(['VIEW ON ',
