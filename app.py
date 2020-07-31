@@ -363,14 +363,14 @@ app.layout = html.Div(children = [
                                                 'font-family': 'Futura',
                                                 'color': '#282A2A',
                                                 'font-weight': 'bold'}),
-            html.Button(['VIEW ON ',
-                    html.A('GITHUB', href = 'https://github.com/cansu-freeman/indicator-app',
-                        style = {'color': highlightColor}
-                    )
-            ], style = {'display': 'inline-block',
-                        'width': '166px',
-                        'height': '40px'}
-            ),
+            # html.Button(['VIEW ON ',
+            #         html.A('GITHUB', href = 'https://github.com/cansu-freeman/indicator-app',
+            #             style = {'color': highlightColor}
+            #         )
+            # ], style = {'display': 'inline-block',
+            #             'width': '166px',
+            #             'height': '40px'}
+            # ),
     ], 
     style = {'background': 'white',
                 'width': '100%'}
@@ -573,7 +573,7 @@ app.layout = html.Div(children = [
     'backgroundColor': backgroundColor,
     'padding': '10px',
     'color': textColor,
-    'font-family': 'Futura',
+    'font-family': 'Futura, Trebuchet MS, Verdana, Sans-serif',
     'font-weight': ''})
 
 
