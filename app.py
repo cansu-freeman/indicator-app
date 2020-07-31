@@ -139,7 +139,7 @@ fig1.add_trace(go.Scatter(x = ICSA_df['Date'], y = CCSA_df['CCSA'],
                     name = 'Continuing Claims',
                     line_color = colorTwo))
 fig1.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisMonthlyStyle, 
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -154,7 +154,7 @@ fig2.add_trace(go.Bar(x = ICSA_historical['Date'], y = ICSA_historical['ICSA'],
                     name = 'Initial Claims',
                     marker_color = colorOne))
 fig2.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -170,7 +170,7 @@ fig3.add_trace(go.Bar(x = unemploymentRate_df['Date'], y = unemploymentRate_df['
                     name = 'Unemployment Rate',
                     marker_color = colorOne))
 fig3.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisPercentStyle,
     margin= marginStyle,
@@ -191,7 +191,7 @@ fig4.add_trace(go.Scatter(x = unemploymentRate_df['Date'], y = unemploymentRate_
                     name = 'Unemployment Rate',
                     line_color = colorOne))
 fig4.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisPercentStyle,
     margin= marginStyle,
@@ -206,7 +206,7 @@ fig5.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['12M Change
                     name = 'MoY Change in Payroll Jobs',
                     marker_color = colorTwo))
 fig5.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -221,7 +221,7 @@ fig6.add_trace(go.Bar(x = payrollJobs_df['Date'], y = payrollJobs_df['1M Change'
                     name = 'MoY Change in Payroll Jobs',
                     marker_color = colorTwo))
 fig6.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin= marginStyle,
@@ -254,7 +254,7 @@ fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-'+lastMonth], y = jobsB
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
 fig7.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = {
         'title': 'Number of Jobs (in thousands)',
         'showline': True,
@@ -293,7 +293,7 @@ fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-'+lastMonth], y = jobsB
                     orientation = 'h',
                     marker_color = jobsBySector_MoY_df['Color']))
 fig8.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = {
         'title': 'Number of Jobs (in thousands)',
         'showline': True,
@@ -317,7 +317,7 @@ fig9.add_trace(go.Bar(x = realGDP_df['Date'], y = realGDP_df['Percent Change'],
                     name = 'Percent Change',
                     marker_color = realGDP_df['Color']))
 fig9.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisPercentStyle,
     margin = marginStyle,
@@ -334,7 +334,7 @@ fig10.add_trace(go.Scatter(x = realGDP_df['Date'], y = realGDP_df['Real GDP'],
                     mode = 'lines',
                     line_color = colorTwo))
 fig10.update_layout(
-    font = {'family': 'Futura'},
+    font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
     yaxis = yaxisStyle,
     margin = marginStyle,
