@@ -125,7 +125,7 @@ lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastLastSaturdayString, 'in_mill
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
 
-currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-'+lastMonth, 'Unemployment Rate'].sum()
+currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-06', 'Unemployment Rate'].sum()
 
 
 ### fig1: Recent Initial and Continued Claims for Unemployment Nationally
@@ -245,11 +245,11 @@ jobsBySector_MoM_df['Sector'].replace({'fedGovt 1M': 'Federal Govt',
                                         'other 1M': 'Other Servies',
                                         'transp 1M': 'Transportation',
                                         'info 1M': 'Information'}, inplace = True)
-jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-'+lastMonth]<0, colorThree, colorOne)
+jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-06']<0, colorThree, colorOne)
 
 fig7 = go.Figure()
-fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-'+lastMonth], y = jobsBySector_MoM_df['Sector'],
-                    text = jobsBySector_MoM_df[thisYear+'-'+lastMonth].round(1), #change the rounding next month
+fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-06'], y = jobsBySector_MoM_df['Sector'],
+                    text = jobsBySector_MoM_df[thisYear+'-06'].round(1), #change the rounding next month
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
@@ -284,11 +284,11 @@ jobsBySector_MoY_df['Sector'].replace({'fedGovt 12M': 'Federal Govt',
                                         'transp 12M': 'Transportation',
                                         'info 12M': 'Information'}, inplace = True)
 
-jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-'+lastMonth]<0, colorThree, colorOne)
+jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-06']<0, colorThree, colorOne)
 
 fig8 = go.Figure()
-fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-'+lastMonth], y = jobsBySector_MoY_df['Sector'],
-                    text = jobsBySector_MoY_df[thisYear+'-'+lastMonth].round(1),
+fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-06'], y = jobsBySector_MoY_df['Sector'],
+                    text = jobsBySector_MoY_df[thisYear+'-06'].round(1),
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoY_df['Color']))
