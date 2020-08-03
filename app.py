@@ -123,7 +123,7 @@ totalInitialClaims = (totalInitialClaims/1000000).round(1)
 lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
-totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
+totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == threeSatsAgo, 'in_millions'].values[0].round(1)
 
 currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-06', 'Unemployment Rate'].sum()
 
@@ -355,7 +355,6 @@ app.layout = html.Div(children = [
         html.Img(src = app.get_asset_url('icon.png'), alt = 'The Indicator App Logo', style = {
             'width': '100px',
             'height': '100px',
-            #'vertical-align': 'bottom'
         }),
             html.H1('The Indicator  ', style = {'display': 'inline-block',
                                                 'width': '65%',
