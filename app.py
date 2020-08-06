@@ -88,13 +88,18 @@ lastMonth = '0'+str(thisMonth - 1)
 twoMonthsAgo = '0'+str(thisMonth -2)
 
 lastSaturday = today - timedelta(days=today.weekday()) + timedelta(days=5, weeks=-1)
-lastSaturdayString = lastSaturday.strftime('%Y-%m-%d')
+twoSatsAgo = lastSaturday + timedelta(weeks=-1)
+threeSatsAgo = twoSatsAgo + timedelta(weeks=-1)
 
-lastLastSaturday = lastSaturday + timedelta(weeks=-1)
-lastLastSaturdayString = lastLastSaturday.strftime('%Y-%m-%d')
+# If today is Mon,Tues,Wed then use appropriate 'week-ending' dates for initial and continuing claims
+if today.weekday() in {0, 1, 2}:
+    initialClaimsWeekEndingSat = twoSatsAgo.strftime('%Y-%m-%d')
+    continuedClaimsWeekEndingSat = threeSatsAgo.strftime('%Y-%m-%d')
+else:
+    initialClaimsWeekEndingSat = lastSaturday.strftime('%Y-%m-%d')
+    continuedClaimsWeekEndingSat = twoSatsAgo.strftime('%Y-%m-%d')
 
-threeSatsAgo = lastLastSaturday + timedelta(weeks=-1)
-threeSatsAgo = threeSatsAgo.strftime('%Y-%m-%d')
+
 
 
 ### SERVER AND APP SETUP
@@ -120,10 +125,10 @@ realGDP_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indica
 totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims/1000000).round(1)
 
-lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == lastLastSaturdayString, 'in_millions'].values[0].round(1)
+lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
-totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == threeSatsAgo, 'in_millions'].values[0].round(1)
+totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == continuedClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
 
 currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-06', 'Unemployment Rate'].sum()
 
