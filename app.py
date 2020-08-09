@@ -75,6 +75,7 @@ headerStyle = {'letter-spacing': '2px',
                 'text-align': 'left'
 }
 
+
    
 
 
@@ -130,7 +131,7 @@ lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == continuedClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
 
-currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-06', 'Unemployment Rate'].sum()
+currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-07', 'Unemployment Rate'].sum()
 
 
 ### fig1: Recent Initial and Continued Claims for Unemployment Nationally
@@ -153,11 +154,13 @@ fig1.update_layout(
     legend = legendStyle
 )
 
+
 ### fig2: Historical Initial Claims Nationally
 fig2 = go.Figure()
 fig2.add_trace(go.Bar(x = ICSA_historical['Date'], y = ICSA_historical['ICSA'],
                     name = 'Initial Claims',
-                    marker_color = colorOne))
+                    marker_color = colorOne
+                    ))
 fig2.update_layout(
     font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = xaxisYearlyStyle,
@@ -165,11 +168,12 @@ fig2.update_layout(
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 
-### fig3: Unemployment Rate since 2010
+### fig3: Unemployment Rate since 2007
 fig3 = go.Figure()
 fig3.add_trace(go.Bar(x = unemploymentRate_df['Date'], y = unemploymentRate_df['Unemployment Rate'],
                     name = 'Unemployment Rate',
@@ -181,7 +185,8 @@ fig3.update_layout(
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 
@@ -202,7 +207,8 @@ fig4.update_layout(
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode ='x unified'
 )
 
 ###fig5: Payroll Jobs
@@ -217,7 +223,8 @@ fig5.update_layout(
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 ### fig6: Month to Month Payroll Jobs Change
@@ -232,7 +239,8 @@ fig6.update_layout(
     margin= marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 ### fig7: Recent Month Change Payroll Jobs by Sector 
@@ -250,11 +258,11 @@ jobsBySector_MoM_df['Sector'].replace({'fedGovt 1M': 'Federal Govt',
                                         'other 1M': 'Other Servies',
                                         'transp 1M': 'Transportation',
                                         'info 1M': 'Information'}, inplace = True)
-jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-06']<0, colorThree, colorOne)
+jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-07']<0, colorThree, colorOne)
 
 fig7 = go.Figure()
-fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-06'], y = jobsBySector_MoM_df['Sector'],
-                    text = jobsBySector_MoM_df[thisYear+'-06'].round(1), #change the rounding next month
+fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-07'], y = jobsBySector_MoM_df['Sector'],
+                    text = jobsBySector_MoM_df[thisYear+'-07'].round(1), #change the rounding next month
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
@@ -289,11 +297,11 @@ jobsBySector_MoY_df['Sector'].replace({'fedGovt 12M': 'Federal Govt',
                                         'transp 12M': 'Transportation',
                                         'info 12M': 'Information'}, inplace = True)
 
-jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-06']<0, colorThree, colorOne)
+jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-07']<0, colorThree, colorOne)
 
 fig8 = go.Figure()
-fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-06'], y = jobsBySector_MoY_df['Sector'],
-                    text = jobsBySector_MoY_df[thisYear+'-06'].round(1),
+fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-07'], y = jobsBySector_MoY_df['Sector'],
+                    text = jobsBySector_MoY_df[thisYear+'-07'].round(1),
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoY_df['Color']))
@@ -328,7 +336,8 @@ fig9.update_layout(
     margin = marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 ### fig10: Quarterly Real GDP (trillions)
@@ -345,7 +354,8 @@ fig10.update_layout(
     margin = marginStyle,
     paper_bgcolor = 'white',
     plot_bgcolor = 'white',
-    legend = legendStyle
+    legend = legendStyle,
+    hovermode = 'x'
 )
 
 
@@ -412,7 +422,7 @@ app.layout = html.Div(children = [
         html.Div([
             html.Br(),
             html.H3(str(currentUnempRate)+' %'),
-            html.P(['Unemployment Rate', html.Br(), 'June 2020']),
+            html.P(['Unemployment Rate', html.Br(), 'July 2020']),
             html.Br(),
         ], style = quadBoxStyle, className = 'four columns')
 
@@ -500,17 +510,17 @@ app.layout = html.Div(children = [
             ]),
 
             dcc.Tab(label = 'Current Month Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector for June 2020 (in thousands 000's)"),
+                html.H6("Payroll Job Change by Sector for July 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoM',
                     figure = fig7,
                     config = {'staticPlot': True}
                 ),
-                html.P('Change in number of jobs for the month of June. The "Leisure and Hospitality sector gained over 2 million jobs.')
+                html.P('Change in number of jobs for the month of July. The "Leisure and Hospitality sector gained almost 600,000 jobs.')
             ]),
 
             dcc.Tab(label = 'One Year Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector from June 2019 to June 2020 (in thousands 000's)"),
+                html.H6("Payroll Job Change by Sector from July 2019 to July 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoY',
                     figure = fig8,
