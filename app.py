@@ -262,15 +262,14 @@ jobsBySector_MoM_df['Color'] = np.where(jobsBySector_MoM_df[thisYear+'-07']<0, c
 
 fig7 = go.Figure()
 fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-07'], y = jobsBySector_MoM_df['Sector'],
-                    text = jobsBySector_MoM_df[thisYear+'-07'].round(1), #change the rounding next month
+                    text = (jobsBySector_MoM_df[thisYear+'-07']/1000).round(1), 
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
 fig7.update_layout(
-    title = 'US Jobs Change by Sector for July 2020',
     font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = {
-        'title': 'Number of Jobs (in thousands)',
+        'title': 'Number of Jobs',
         'showline': True,
         'showgrid': True,
         'gridcolor': '#e1e1e1',
@@ -303,14 +302,14 @@ jobsBySector_MoY_df['Color'] = np.where(jobsBySector_MoY_df[thisYear+'-07']<0, c
 
 fig8 = go.Figure()
 fig8.add_trace(go.Bar(x = jobsBySector_MoY_df[thisYear+'-07'], y = jobsBySector_MoY_df['Sector'],
-                    text = jobsBySector_MoY_df[thisYear+'-07'].round(1),
+                    text = (jobsBySector_MoY_df[thisYear+'-07']/1000).round(1),
                     textposition = 'outside',
                     orientation = 'h',
                     marker_color = jobsBySector_MoY_df['Color']))
 fig8.update_layout(
     font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = {
-        'title': 'Number of Jobs (in thousands)',
+        'title': 'Number of Jobs',
         'showline': True,
         'showgrid': True,
         'gridcolor': '#e1e1e1',
@@ -499,7 +498,7 @@ app.layout = html.Div(children = [
                     id = 'annual-jobs-change',
                     figure = fig5
                 ),
-                html.P("This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior. The y-axis is scaled in thousands (000's) so 20k corresponds to 2 million. This effect will be changed in future versions of The Indicator.")
+                html.P("This is showing the change in the amount of Payroll Jobs each month from the corresponding month a year prior.")
             ]),
 
             dcc.Tab(label = 'Monthly Jobs Change', children = [
@@ -508,7 +507,7 @@ app.layout = html.Div(children = [
                     id = 'monthly-jobs-change',
                     figure = fig6
                 ),
-                html.P("This chart shows month-to-month change in payroll jobs. The y-axis is scaled in thousands (000's) so 20k corresponds to 2 million. This effect will be changed in future versions of The Indicator.")
+                html.P("This chart shows month-to-month change in payroll jobs.")
             ]),
 
             dcc.Tab(label = 'Current Month Job Change by Sector', children = [
@@ -518,17 +517,17 @@ app.layout = html.Div(children = [
                     figure = fig7,
                     config = {'staticPlot': True}
                 ),
-                html.P('Change in number of jobs for the month of July. The "Leisure and Hospitality sector gained almost 600,000 jobs.')
+                html.P('This chart represents the change in number of jobs for the month of July. The "Leisure and Hospitality sector gained almost 600,000 jobs.')
             ]),
 
             dcc.Tab(label = 'One Year Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector from July 2019 to July 2020 (in thousands 000's)"),
+                html.H6("Payroll Job Change by Sector from July 2019 to July 2020"),
                 dcc.Graph(
                     id = 'sector-MoY',
                     figure = fig8,
                     config = {'staticPlot': True}
                 ),
-                html.P('This represents the change in jobs per sector over the last year.')
+                html.P('This represents the change in jobs per sector over the last year. The Leisure and Hospitality sector has lost over 4 million jobs in the last year.')
             ])
 
         ], colors = tabColors)
