@@ -389,6 +389,13 @@ hr {
   clear: both; }
 
 
+/* Chart Customization
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.modebar {
+display: none !important;
+}
+
+
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
