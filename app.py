@@ -267,6 +267,7 @@ fig7.add_trace(go.Bar(x = jobsBySector_MoM_df[thisYear+'-07'], y = jobsBySector_
                     orientation = 'h',
                     marker_color = jobsBySector_MoM_df['Color']))
 fig7.update_layout(
+    title = 'US Jobs Change by Sector for July 2020',
     font = {'family': 'Futura, Trebuchet MS, Verdana, Sans-serif'},
     xaxis = {
         'title': 'Number of Jobs (in thousands)',
@@ -280,6 +281,7 @@ fig7.update_layout(
     plot_bgcolor = 'white',
     legend = legendStyle
 )
+
 
 ### fig8: Recent Yearly (MoY) Change Payroll Jobs by Sector
 # Preparing DF
