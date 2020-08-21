@@ -126,8 +126,8 @@ realGDP_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indica
 totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims/1000000).round(1)
 
-lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_millions'].values[0].round(3)
-lastWeekClaims = lastWeekClaims*1000
+lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_millions'].values[0].round(2)
+#lastWeekClaims = lastWeekClaims*1000
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == continuedClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
@@ -416,7 +416,7 @@ app.layout = html.Div(children = [
 
         html.Div([
             html.Br(),
-            html.H3(str(lastWeekClaims)+' K'),
+            html.H3(str(lastWeekClaims)+' M'),
             html.P(['New Claims Filed', html.Br(), 'Last Week']),
             html.Br(),    
         ], style = quadBoxStyle, className = 'four columns'),
