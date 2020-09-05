@@ -512,23 +512,23 @@ app.layout = html.Div(children = [
             ]),
 
             dcc.Tab(label = 'Current Month Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector for July 2020 (in thousands 000's)"),
+                html.H6("Payroll Job Change by Sector for August 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoM',
                     figure = fig7,
                     config = {'staticPlot': True}
                 ),
-                html.P('This chart represents the change in number of jobs for the month of July. The "Leisure and Hospitality sector gained almost 600,000 jobs.')
+                html.P('This chart represents the change in number of jobs for the month of August.')
             ]),
 
             dcc.Tab(label = 'One Year Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector from July 2019 to July 2020"),
+                html.H6("Payroll Job Change by Sector from Aug 2019 to Aug 2020"),
                 dcc.Graph(
                     id = 'sector-MoY',
                     figure = fig8,
                     config = {'staticPlot': True}
                 ),
-                html.P('This represents the change in jobs per sector over the last year. The Leisure and Hospitality sector has lost over 4 million jobs in the last year.')
+                html.P('This represents the change in jobs per sector over the last year. The Leisure and Hospitality sector has lost almost 4 million jobs in the last year.')
             ])
 
         ], colors = tabColors)
