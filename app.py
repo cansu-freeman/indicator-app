@@ -111,15 +111,15 @@ app.title = 'The Indicator App' #tab on top of browser
 
 
 ### SPREADSHEETS
-ICSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/fredICSA.csv', header =0)
-ICSA_historical = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/ICSA_historical.csv', header = 0)
-CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/fredCCSA.csv', header= 0)
-unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/unemploymentRate.csv', header= 0)
-u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/U6unemployment.csv', header = 0)
-payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/PayrollJobs.csv', header = 0)
-jobsBySector_MoM_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoM.csv', header = 0)
-jobsBySector_MoY_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/payroll-jobs-by-sector/jobsSector_MoY.csv', header = 0)
-realGDP_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app-data/master/realGDP.csv', header = 0)
+ICSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/fredICSA.csv', header =0)
+ICSA_historical = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/ICSA_historical.csv', header = 0)
+CCSA_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/fredCCSA.csv', header= 0)
+unemploymentRate_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/unemploymentRate.csv', header= 0)
+u6_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/U6unemployment.csv', header = 0)
+payrollJobs_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/PayrollJobs.csv', header = 0)
+jobsBySector_MoM_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/payroll-jobs-by-sector/jobsSector_MoM.csv', header = 0)
+jobsBySector_MoY_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/payroll-jobs-by-sector/jobsSector_MoY.csv', header = 0)
+realGDP_df = pd.read_csv('https://raw.githubusercontent.com/cansu-freeman/indicator-app/master/data/realGDP.csv', header = 0)
 
 
 ### KEY INDICATORS AS VARIABLES
