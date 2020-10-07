@@ -132,7 +132,7 @@ lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == continuedClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
 
-currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-08', 'Unemployment Rate'].sum()
+currentUnempRate = unemploymentRate_df.loc[unemploymentRate_df['Date'] == thisYear+'-09', 'Unemployment Rate'].sum()
 
 
 ### fig1: Recent Initial and Continued Claims for Unemployment Nationally
@@ -424,7 +424,7 @@ app.layout = html.Div(children = [
         html.Div([
             html.Br(),
             html.H3(str(currentUnempRate)+' %'),
-            html.P(['Unemployment Rate', html.Br(), 'August 2020']),
+            html.P(['Unemployment Rate', html.Br(), 'September 2020']),
             html.Br(),
         ], style = quadBoxStyle, className = 'four columns')
 
@@ -512,23 +512,23 @@ app.layout = html.Div(children = [
             ]),
 
             dcc.Tab(label = 'Current Month Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector for August 2020 (in thousands 000's)"),
+                html.H6("Payroll Job Change by Sector for September 2020 (in thousands 000's)"),
                 dcc.Graph(
                     id = 'sector-MoM',
                     figure = fig7,
                     config = {'staticPlot': True}
                 ),
-                html.P('This chart represents the change in number of jobs for the month of August.')
+                html.P('This chart represents the change in number of jobs for the month of September.')
             ]),
 
             dcc.Tab(label = 'One Year Job Change by Sector', children = [
-                html.H6("Payroll Job Change by Sector from Aug 2019 to Aug 2020"),
+                html.H6("Payroll Job Change by Sector from Sep 2019 to Sep 2020"),
                 dcc.Graph(
                     id = 'sector-MoY',
                     figure = fig8,
                     config = {'staticPlot': True}
                 ),
-                html.P('This represents the change in jobs per sector over the last year. The Leisure and Hospitality sector has lost almost 4 million jobs in the last year.')
+                html.P('This represents the change in jobs per sector over the last year.')
             ])
 
         ], colors = tabColors)
