@@ -131,7 +131,7 @@ totalInitialClaims = ICSA_df['ICSA'].sum()
 totalInitialClaims = (totalInitialClaims / 1000000).round(1)
 
 lastWeekClaims = ICSA_df.loc[ICSA_df['Date'] == initialClaimsWeekEndingSat, 'in_millions'].values[0].round(2)
-# lastWeekClaims = lastWeekClaims*1000
+lastWeekClaims = lastWeekClaims*1000
 
 CCSA_df['Date'] = CCSA_df['Date'].astype(str)
 totalContinuedClaims = CCSA_df.loc[CCSA_df['Date'] == continuedClaimsWeekEndingSat, 'in_millions'].values[0].round(1)
@@ -410,7 +410,7 @@ app.layout = html.Div(children=[
 
         html.Div([
             html.Br(),
-            html.H3(str(lastWeekClaims) + ' M'),
+            html.H3(str(lastWeekClaims) + ' k'),
             html.P(['New Claims Filed', html.Br(), 'Last Week']),
             html.Br(),
         ], style=quadBoxStyle, className='four columns'),
