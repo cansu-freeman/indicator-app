@@ -1,9 +1,9 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-# import plotly.express as px
+import plotly.express as px
 import plotly.graph_objs as go
-# from plotly.subplots import make_subplots
+from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 from datetime import date, timedelta
@@ -418,7 +418,7 @@ app.layout = html.Div(children=[
         html.Div([
             html.Br(),
             html.H3(str(currentUnempRate) + ' %'),
-            html.P(['Unemployment Rate', html.Br(), 'September 2020']),
+            html.P(['Unemployment Rate', html.Br(), 'November 2020']),
             html.Br(),
         ], style=quadBoxStyle, className='four columns')
 
